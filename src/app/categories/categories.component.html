@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 bg-secondary-theme p-5 shadow-effect">
+      <h3 class="text-center text-theme-primary">New Categories</h3>
+      <p class="text-center mb-5">You can enter new categories from here....!</p>
+      <form class="form-inline text-center d-flex" #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+        <div class="form-group col-md-10">
+          <input type="text" class="form-control shadow-effect" placeholder="Add category" name="category" ngModel required>
+        </div>
+        <button type="submit" class="btn btn-info btn-block btn-theme mx-2">Add Category</button>
+      </form>
+    </div>
+  </div>
+</div>
