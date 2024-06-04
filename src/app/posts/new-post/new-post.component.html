@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3 class="text-theme-primary"> Add New Post </h3>
+            <p class="mb-5"> You can add your new post here </p>
+        </div>
+    </div>
+    <form [formGroup]="postform" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card shadow-effect">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="form-control" (keyup)="onKeyUp($event)" formControlName="title" [ngClass]="{'is-invalid': fc['title'].touched && fc['title'].invalid}">
+                            <div *ngIf="fc['title'].errors?.['required'] && fc['title'].touched" class="alert alert-danger">Title is required.</div>
+                            <div *ngIf="fc['title'].errors?.['maxlength'] && fc['title'].touched" class="alert alert-danger">Title must be at most 10 characters long.</div>
+                          </div>
+                        
+                        <div class="form-group">
+                            <label> Permalink </label>
+                            <input type="text" class="form-control" name="permalink" [(ngModel)] = 'permalink' formControlName="permalink" >
+                        </div>
+                        <div class="form-group">
+                            <label>Excerpt</label>
+                          <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="excerpt"></textarea>
+                          <div *ngIf="fc['excerpt'].errors?.['required'] && fc['excerpt'].touched" class="alert alert-danger">excerpt is required.</div>
+                            <div *ngIf="fc['excerpt'].errors?.['maxlength'] && fc['excerpt'].touched" class="alert alert-danger">excerpt must be at most 10 characters long.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="">Please Select Post Category</label>
+                    <select name="" class="form-control" id="" formControlName="category">
+                        <option value="" disabled>Please Select</option>
+                        <option value="" *ngFor="let item of categories"> {{item.data.category}} </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Post Image</label>
+                    <img [src]="imgSrc" class="form-control img-fuild img-preview" alt="">
+                    <input type="file" class="form-control" name="" id="" accept="image/*" (change)="onChangePreview($event)" formControlName="postImg" >
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-5">
+            <div class="col-md-12">
+                <div class="card shadow-effect">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="">Content</label>
+                            <angular-editor placeholder="Add your content here " formControlName="content"></angular-editor>
+                            <!-- <textarea name="" class="form-control" id="" cols="30" rows="10"></textarea> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center mb-5">
+                <button class="btn btn-info btn-theme">
+                    Save Post
+                </button>
+                <button class="btn btn-warning ml-3" routerLink="/post">
+                    Back To Post
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>
