@@ -1,3 +1,35 @@
 .img-preview{
     height: 250px;
 }
+/* styles.css */
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .table .btn {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .table img {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  .table .btn-warning {
+    color: #fff;
+  }
+  
+  .table .btn-danger {
+    color: #fff;
+  }
+  
+  .table .btn-success {
+    color: #fff;
+  }
+  
+  .table .btn-info {
+    color: #fff;
+  }
+  

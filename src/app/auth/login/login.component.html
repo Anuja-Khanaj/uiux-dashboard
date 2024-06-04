@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card p-5 shadow bg-secondary-theme">
+          <div class="card-body">
+            <div class="text-center">
+              <h3 class="text-theme-primary">Login</h3>
+              <p>Please login to your admin account to post a new blog post</p>
+            </div>
+            <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
+              <div class="form-group m-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  [(ngModel)]="email"
+                  name="email"
+                  required
+                  email
+                  #emailInput="ngModel"
+                >
+                <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger">
+                  <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                  <div *ngIf="emailInput.errors?.['email']">Invalid email address.</div>
+                </div>
+              </div>
+              <div class="form-group m-2">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  [(ngModel)]="password"
+                  name="password"
+                  required
+                  minlength="6"
+                  #passwordInput="ngModel"
+                >
+                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
+                  <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
+                  <div *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters long.</div>
+                </div>
+              </div>
+              <div class="text-center m-2">
+                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-theme btn-block btn-info px-4">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

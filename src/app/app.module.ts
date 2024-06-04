@@ -16,6 +16,10 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
 import { AllPostComponent } from './posts/all-post/all-post.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { LoginComponent } from './auth/login/login.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     CategoriesComponent,
     NewPostComponent,
-    AllPostComponent
+    AllPostComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AngularEditorModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideStorage(() => getStorage()),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

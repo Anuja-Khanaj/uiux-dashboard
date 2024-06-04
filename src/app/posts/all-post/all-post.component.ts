@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Category } from 'src/app/models/category';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-all-post',
@@ -7,4 +9,24 @@ import { Component } from '@angular/core';
 })
 export class AllPostComponent {
 
+  postArray:any[]=[]; // Initialize with an empty array
+
+  constructor(private postservice: PostsService) { }
+  
+  ngOnInit(): void {
+   this.postservice.loadData().subscribe(val=>{
+    this.postArray = val;
+    console.log(val); 
+   })
+  }
+  delete(path,id){
+    this.postservice.deleteImage(path,id);
+  }
+  onFeatured(id,value){
+    const featureData ={
+      isFeatured:value
+    }
+    this.postservice.FeatureUpdate(id,featureData)
+  }
+  
 }
