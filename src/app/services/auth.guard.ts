@@ -12,6 +12,8 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean | Observable<boolean> | Promise<boolean> {
     if (this.authService.isloggedInGuard) {
+      console.log("Acess Granted...");
+      
       return true;
     } else {
       this.router.navigate(['/login']);
@@ -19,3 +21,4 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+  
