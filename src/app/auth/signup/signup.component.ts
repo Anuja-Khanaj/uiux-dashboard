@@ -9,14 +9,18 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent {
   email: string ;
   password: string ;
+  confirmPassword:string
  constructor(private authservie:AuthService){}
   onSubmit(loginform) {
-    // if (this.email && this.password) {
-    //   console.log('Email:', this.email);
-    //   console.log('Password:', this.password);
+    if ( this.password != this.confirmPassword) {
+      
+          this.authservie.SignUp(loginform.email,loginform.password)
+      console.log('Email:', this.email);
+      console.log('Password:', this.password);
     
-    // }
-
-    this.authservie.SignUp(loginform.email,loginform.password)
+    }
+    else{
+      alert("password doesnt match")
+    }
   }
 }

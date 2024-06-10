@@ -1,53 +1,68 @@
 <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card p-5 shadow bg-secondary-theme">
-          <div class="card-body">
-            <div class="text-center">
-              <h3 class="text-theme-primary">Sign Up</h3>
-              <p>Create your admin account</p>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-5 shadow bg-secondary-theme">
+        <div class="card-body">
+          <div class="text-center">
+            <h3 class="text-theme-primary">Sign Up</h3>
+            <p>Create your admin account</p>
+          </div>
+          <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
+            <div class="form-group m-2">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                [(ngModel)]="email"
+                name="email"
+                required
+                email
+                #emailInput="ngModel"
+              >
+              <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger">
+                <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                <div *ngIf="emailInput.errors?.['email']">Invalid email address.</div>
+              </div>
             </div>
-            <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
-              <div class="form-group m-2">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Email"
-                  [(ngModel)]="email"
-                  name="email"
-                  required
-                  email
-                  #emailInput="ngModel"
-                >
-                <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger">
-                  <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
-                  <div *ngIf="emailInput.errors?.['email']">Invalid email address.</div>
-                </div>
+            <div class="form-group m-2">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                [(ngModel)]="password"
+                name="password"
+                required
+                minlength="6"
+                #passwordInput="ngModel"
+              >
+              <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
+                <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
+                <div *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters long.</div>
               </div>
-              <div class="form-group m-2">
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Password"
-                  [(ngModel)]="password"
-                  name="password"
-                  required
-                  minlength="6"
-                  #passwordInput="ngModel"
-                >
-                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
-                  <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
-                  <div *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters long.</div>
-                </div>
+            </div>
+            <div class="form-group m-2">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Confirm Password"
+                [(ngModel)]="confirmPassword"
+                name="confirmPassword"
+                required
+                minlength="6"
+                #confirmPasswordInput="ngModel"
+              >
+              <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)" class="text-danger">
+
+                <div *ngIf="password !== confirmPassword && confirmPasswordInput.dirty">Passwords do not match.</div>
               </div>
-              <div class="text-center m-2">
-                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-theme btn-block btn-info px-4">Login</button>
-              </div>
-              </form>
-              </div>
-            <span class="text-center">Alrady have account ?<a routerLink="/login">Login</a></span>
-              </div>
-              </div>
-              </div>
+            </div>
+            <div class="text-center m-2">
+              <button [disabled]="loginForm.invalid || password !== confirmPassword" type="submit" class="btn btn-theme btn-block btn-info px-4">Sign Up</button>
+            </div>
+          </form>
+        </div>
+        <span class="text-center">Already have an account? <a routerLink="/login">Login</a></span>
+      </div>
+    </div>
   </div>
-  
+</div>
