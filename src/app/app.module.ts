@@ -21,7 +21,9 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { LoginComponent } from './auth/login/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { SubscribersComponent } from './subscribers/subscribers.component';
-import { PaginationComponent } from './pagination/pagination.component';
+import { SignupComponent } from './auth/signup/signup.component';
+
+// import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { PaginationComponent } from './pagination/pagination.component';
     AllPostComponent,
     LoginComponent,
     SubscribersComponent,
-    PaginationComponent
+    SignupComponent,
+  
+    // PaginationComponent
   ],
   imports: [
     BrowserModule,

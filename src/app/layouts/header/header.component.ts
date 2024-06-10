@@ -9,13 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
   userEmail:string;
-  isLoggedIn$:Observable<boolean>
+  isloggedIn$:Observable<boolean>
   constructor(private authservie:AuthService
   ){}
     ngOnInit(){
     this.userEmail = JSON.parse(localStorage.getItem('user')).email;
     console.log(this.userEmail);
-    this.isLoggedIn$ = this.authservie.isLoggedIn();
+    this.isloggedIn$ = this.authservie.isLoggedIn();
     
     }
     onLogout(){

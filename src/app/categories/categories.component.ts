@@ -11,7 +11,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  
+  isLoading:boolean = true;
+  isDisplay :boolean = false;
   categoryArray:any;
   formCategory:string = '';
   formStatus:string = 'Add Category';
@@ -23,6 +24,8 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.loadData().subscribe(val=>{
       console.log(val);
       this.categoryArray = val;
+      this.isDisplay = true;
+      this.isLoading = false;
     })
   }
 

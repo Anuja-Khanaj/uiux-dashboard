@@ -8,15 +8,18 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./all-post.component.css']
 })
 export class AllPostComponent {
-
+  isLoading:boolean = true;
+  isDisplay :boolean = false;
   postArray:any[]=[]; // Initialize with an empty array
 
   constructor(private postservice: PostsService) { }
   
   ngOnInit(): void {
-   this.postservice.loadData().subscribe(val=>{
-    this.postArray = val;
-    console.log(val); 
+    this.postservice.loadData().subscribe(val=>{
+      this.postArray = val;
+      console.log(val); 
+      this.isLoading = false ;
+      this.isDisplay = true
    })
   }
   delete(path,id){

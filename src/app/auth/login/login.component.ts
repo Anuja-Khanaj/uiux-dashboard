@@ -11,11 +11,7 @@ export class LoginComponent {
   password: string ;
  constructor(private authservie:AuthService){}
   onSubmit(loginform) {
-    // if (this.email && this.password) {
-    //   console.log('Email:', this.email);
-    //   console.log('Password:', this.password);
-    
-    // }
+ 
 
     this.authservie.login(loginform.email,loginform.password)
   }

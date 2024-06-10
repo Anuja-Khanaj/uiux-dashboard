@@ -7,6 +7,8 @@ import { SubscribersService } from '../services/subscribers.service';
   styleUrls: ['./subscribers.component.css']
 })
 export class SubscribersComponent {
+  isLoading:boolean = true;
+  isDisplay :boolean = false;
   subscribersArray: any;
   constructor( private subService: SubscribersService) { }
   ngOnInit(): void {
@@ -16,6 +18,8 @@ export class SubscribersComponent {
       console.log(val);
   
     this.subscribersArray = val;
+    this.isDisplay = true;
+      this.isLoading = false;
     })
 }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
@@ -13,7 +14,7 @@ export class AuthService {
 
   isloggedInGuard: boolean = false;
 
-  constructor(private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router) {
+  constructor(public afs: AngularFirestore,  private afAuth: AngularFireAuth, private toastr: ToastrService, private router: Router) {
     this.checkLoginStatus();
   }
 
@@ -30,6 +31,23 @@ export class AuthService {
     });
   }
 
+  SignUp(email: string, password: string) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.loggedIn.next(true);
+        this.isloggedInGuard = true;
+        localStorage.setItem('loggedIn', 'true'); // Store login state
+        this.router.navigate(['dashboard']);
+        this.toastr.success('Logged In Successfully');
+        this.loadUser();
+        // this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
   loadUser() {
     this.afAuth.authState.subscribe(user => {
       console.log(JSON.parse(JSON.stringify(user)));
@@ -42,8 +60,8 @@ export class AuthService {
       this.toastr.success("User logged out successfully");
       this.loggedIn.next(false);
       this.isloggedInGuard = false;
-      localStorage.removeItem('loggedIn'); // Remove login state
       localStorage.removeItem('user');
+      localStorage.removeItem('loggedIn'); // Remove login state
       this.router.navigate(['/login']);
     });
   }
@@ -61,5 +79,18 @@ export class AuthService {
       this.loggedIn.next(false);
       this.isloggedInGuard = false;
     }
+  }
+
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData = {
+      uid: user.uid,
+      email: user.email
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
   }
 }
