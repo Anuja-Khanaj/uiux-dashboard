@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { PostsService } from 'src/app/services/posts.service';
-
+import { SearchPipe } from 'src/app/pipes/search.pipe';
 @Component({
   selector: 'app-all-post',
   templateUrl: './all-post.component.html',
@@ -10,6 +10,7 @@ import { PostsService } from 'src/app/services/posts.service';
 export class AllPostComponent {
   isLoading:boolean = true;
   isDisplay :boolean = false;
+  searchText:string;
   postArray:any[]=[]; // Initialize with an empty array
 
   constructor(private postservice: PostsService) { }

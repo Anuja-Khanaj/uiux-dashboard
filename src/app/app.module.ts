@@ -22,6 +22,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 // import { PaginationComponent } from './pagination/pagination.component';
 
@@ -37,6 +38,7 @@ import { SignupComponent } from './auth/signup/signup.component';
     LoginComponent,
     SubscribersComponent,
     SignupComponent,
+    SearchPipe,
   
     // PaginationComponent
   ],

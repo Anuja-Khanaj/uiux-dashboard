@@ -1,6 +1,19 @@
 <div class="container">
+  <div class="post card shadow-effect p-4 ">
+    <h2 class="text-center">All Posts</h2>
+    <p class="container"> you can view, edit, and manage all the posts on our platform. Use the search and filter options to find specific posts, and click on any post to see detailed information or make updates</p>
+    <div class="center d-flex">
 
+      <button class="btn btn-warning mx-1" routerLink="/newPost">Add New Post</button>
+      <button class="btn btn-info mx-1" routerLink="/dashboard">Back to Dashboard</button>
+    </div>
+  </div>
  
+
+  
+    <input type="text" class ="form-control" placeholder="Search" [(ngModel)]="searchText">
+
+
   <div class="row mt-4">
     <div class="col-md-12">
         <div class="card shadow-effect">
@@ -22,8 +35,7 @@
                       </thead>
                     
                       <tbody *ngIf="postArray">
-                       
-                        <tr *ngFor="let post of postArray; let i = index">
+                        <tr *ngFor="let post of postArray| search:searchText; let i = index ">
                           <td width="10" >{{ i + 1 }}</td>
                           <td width="200"><img [src]="post.data.postImgPath" class="img img-fluid" alt="Post Image"></td>
                           <td width="200">{{ post.data.title }}</td>
